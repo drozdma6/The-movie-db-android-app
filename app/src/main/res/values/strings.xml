@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">semestral</string>
+    <string name="fiction">Fiction</string>
+    <string name="detective">Detective</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="horror">Horror</string>
+    <string name="comic_book">Comic Book</string>
+</resources>
