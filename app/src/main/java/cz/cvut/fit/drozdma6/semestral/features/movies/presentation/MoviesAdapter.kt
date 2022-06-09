@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import cz.cvut.fit.drozdma6.semestral.databinding.MovieItemBinding
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
 
@@ -16,6 +17,9 @@ class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.MovieHolder>(MoviesDiffCa
     class MovieHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root){
             fun bind(movie : Movie){
                 binding.textName.text = movie.title
+                val imageLoadUrl = "https://image.tmdb.org/t/p"
+                val imageSize = "/w154"
+                binding.poster.load(imageLoadUrl + imageSize + movie.poster_path)
             }
         }
 

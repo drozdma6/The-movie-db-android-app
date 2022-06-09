@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import cz.cvut.fit.drozdma6.semestral.databinding.MoviesFragmentBinding
@@ -28,7 +29,7 @@ class MoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.recycler?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.recycler?.layoutManager = GridLayoutManager(requireContext(), 2)
         binding?.recycler?.adapter = moviesAdapter
         viewModel.moviesStream.observe(viewLifecycleOwner) { moviesState ->
             if (moviesState != null) {
