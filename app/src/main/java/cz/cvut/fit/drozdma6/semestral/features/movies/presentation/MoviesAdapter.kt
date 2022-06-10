@@ -16,7 +16,6 @@ class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.MovieHolder>(MoviesDiffCa
 
     class MovieHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root){
             fun bind(movie : Movie){
-                binding.textName.text = movie.title
                 val imageLoadUrl = "https://image.tmdb.org/t/p"
                 val imageSize = "/w154"
                 binding.poster.load(imageLoadUrl + imageSize + movie.poster_path)

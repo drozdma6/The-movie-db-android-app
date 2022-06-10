@@ -5,4 +5,6 @@
     <string name="fantasy">Fantasy</string>
     <string name="horror">Horror</string>
     <string name="comic_book">Comic Book</string>
+    <string name="most_poular">Most poular</string>
+    <string name="top_rated">Top Rated</string>
 </resources>
