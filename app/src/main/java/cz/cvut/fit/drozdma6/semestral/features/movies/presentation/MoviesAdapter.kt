@@ -10,19 +10,19 @@ import cz.cvut.fit.drozdma6.semestral.databinding.MovieItemBinding
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
 
 class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.MovieHolder>(MoviesDiffCallback()) {
-    init{
+    init {
         stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
-    class MovieHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root){
-            fun bind(movie : Movie){
-                val imageLoadUrl = "https://image.tmdb.org/t/p"
-                val imageSize = "/w154"
-                binding.poster.load(imageLoadUrl + imageSize + movie.poster_path)
-            }
+    class MovieHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(movie: Movie) {
+            val imageLoadUrl = "https://image.tmdb.org/t/p"
+            val imageSize = "/w154"
+            binding.poster.load(imageLoadUrl + imageSize + movie.poster_path)
         }
+    }
 
-    private class MoviesDiffCallback : DiffUtil.ItemCallback<Movie>(){
+    private class MoviesDiffCallback : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem.id == newItem.id
         }
@@ -30,7 +30,6 @@ class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.MovieHolder>(MoviesDiffCa
         override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem == newItem
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
@@ -41,5 +40,4 @@ class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.MovieHolder>(MoviesDiffCa
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
 }

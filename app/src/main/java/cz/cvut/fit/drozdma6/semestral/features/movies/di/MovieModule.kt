@@ -1,7 +1,7 @@
 package cz.cvut.fit.drozdma6.semestral.features.movies.di
 
-import cz.cvut.fit.drozdma6.semestral.features.movies.MovieDatabaseDataSource
-import cz.cvut.fit.drozdma6.semestral.features.movies.MovieRepository
+import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieDatabaseDataSource
+import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRepository
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRemoteDataSource
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.retrofit.MovieApiDescription
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.retrofit.MovieRetrofitDataSource
@@ -13,25 +13,29 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val movieModule = module {
-    factory{
+    factory {
         get<Retrofit>().create(MovieApiDescription::class.java)
     }
-    factory<MovieRemoteDataSource>{
+    factory<MovieRemoteDataSource> {
         MovieRetrofitDataSource(movieApiDescription = get())
     }
     factory {
-        get<MovieDatabase>().getMovieDao()
+        get<MovieDatabase>().getPopularMovieDao()
     }
 
-    factory<MovieDatabaseDataSource>{
-        MovieRoomDataSource(movieDao = get())
+    factory {
+        get<MovieDatabase>().getTopRatedMovieDao()
     }
 
-    single{
-        MovieRepository(movieDatabaseDataSource = get(), movieRemoteDataSource = get())
+    factory<MovieDatabaseDataSource> {
+        MovieRoomDataSource(popularMovieDao = get(), topRatedMovieDao = get())
     }
 
-    viewModel{
+    single {
+        MovieRepository(movieDatabase = get(), movieRemoteDataSource = get())
+    }
+
+    viewModel {
         MoviesViewModel(movieRepository = get())
     }
 }

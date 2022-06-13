@@ -5,4 +5,7 @@ import retrofit2.http.GET
 interface MovieApiDescription {
     @GET("movie/popular?api_key=eb5864020f8c15b166c9b0818eefe24a")
     suspend fun fetchPopularMovies(): MovieResponse
+
+    @GET("trending/movie/day?api_key=eb5864020f8c15b166c9b0818eefe24a")
+    suspend fun fetchTopRatedMovies(): MovieResponse
 }
