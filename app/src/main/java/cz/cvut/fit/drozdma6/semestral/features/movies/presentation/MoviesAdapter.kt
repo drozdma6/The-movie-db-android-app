@@ -9,16 +9,20 @@ import coil.load
 import cz.cvut.fit.drozdma6.semestral.databinding.MovieItemBinding
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
 
-class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.MovieHolder>(MoviesDiffCallback()) {
+class MoviesAdapter(
+    private val onMovieClick: (Movie) -> Unit
+) : ListAdapter<Movie, MoviesAdapter.MovieHolder>(MoviesDiffCallback()) {
     init {
         stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
-    class MovieHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
+    class MovieHolder(private val binding: MovieItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(movie: Movie, onMovieClick: (Movie) -> Unit) {
             val imageLoadUrl = "https://image.tmdb.org/t/p"
             val imageSize = "/w154"
             binding.poster.load(imageLoadUrl + imageSize + movie.poster_path)
+            binding.root.setOnClickListener { onMovieClick(movie) }
         }
     }
 
@@ -38,6 +42,7 @@ class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.MovieHolder>(MoviesDiffCa
     }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-        holder.bind(getItem(position))
+        val movie = getItem(position)
+        holder.bind(movie, onMovieClick)
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/moviesFragment">
+
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="cz.cvut.fit.drozdma6.semestral.features.movies.presentation.MoviesFragment"
+        android:label="HOME">
+        <action
+            android:id="@+id/toMovieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="cz.cvut.fit.drozdma6.semestral.features.movies.presentation.MovieDetailFragment"
+        android:label="MovieDetailFragment">
+        <argument
+            android:name="movie"
+            app:argType="cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie" />
+    </fragment>
+</navigation>
