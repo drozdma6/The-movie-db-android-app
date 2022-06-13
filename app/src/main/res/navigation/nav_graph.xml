@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/moviesFragment"
         android:name="cz.cvut.fit.drozdma6.semestral.features.movies.presentation.MoviesFragment"
-        android:label="HOME">
+        android:label="Home">
         <action
             android:id="@+id/toMovieDetailFragment"
             app:destination="@id/movieDetailFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="cz.cvut.fit.drozdma6.semestral.features.movies.presentation.MovieDetailFragment"
-        android:label="MovieDetailFragment">
+        android:label="Detail">
         <argument
             android:name="movie"
             app:argType="cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie" />
