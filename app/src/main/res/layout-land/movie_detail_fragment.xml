@@ -11,19 +11,17 @@
         android:id="@+id/image_view"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearance="@style/ShapeAppearance.movieItem.poster" />
-
 
     <ImageButton
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="30dp"
         android:background="@null"
         android:src="@drawable/ic_back"
@@ -33,13 +31,15 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="match_parent"
+        android:layout_width="480dp"
         android:layout_height="0dp"
-        android:background="@drawable/movie_detail_text_background"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/movie_detail_text_background_land"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/add_to_bag_wrapper"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_view">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_view"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -78,12 +78,14 @@
                 app:layout_constraintStart_toEndOf="@id/original_language"
                 app:layout_constraintTop_toBottomOf="@id/txt_title" />
 
+
             <TextView
                 android:id="@+id/txt_detail"
                 style="@style/TextAppearance.semestral.BookDetailText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="50dp"
                 android:lineSpacingMultiplier="1.5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -95,24 +97,19 @@
 
     <RelativeLayout
         android:id="@+id/add_to_bag_wrapper"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/movie_detail_button_background_land"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scrollView">
+        app:layout_constraintEnd_toEndOf="@id/scrollView"
+        app:layout_constraintStart_toStartOf="@id/scrollView">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_to_watchlist"
             style="@style/ButtonStyle"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/normal_button"
             android:text="@string/add_to_watchlist" />
     </RelativeLayout>

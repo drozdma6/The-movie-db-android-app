@@ -41,13 +41,13 @@ class MovieDetailFragment : Fragment() {
             activity?.onBackPressed()
         }
         txtTitle.text = movie.title
-        val imageBaseUrl = "https://image.tmdb.org/t/p/w185"
+        val imageBaseUrl = "https://image.tmdb.org/t/p/w154"
         val url = imageBaseUrl + movie.poster_path
         txtDetail.text = movie.overview
+        txtOriginalLanguage.text = movie.original_language
         //set dynamic background color
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            val bmp = loadImageAsBitmap(url)
-            val builder = Palette.Builder(bmp)
+            val builder = Palette.Builder(loadImageAsBitmap(url))
             builder.generate { palette: Palette? ->
                 if (palette?.dominantSwatch != null) {
                     val color = palette.dominantSwatch!!.rgb

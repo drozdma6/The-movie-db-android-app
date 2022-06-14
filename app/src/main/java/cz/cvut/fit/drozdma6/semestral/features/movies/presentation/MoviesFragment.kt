@@ -24,10 +24,7 @@ class MoviesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        MoviesFragmentBinding.inflate(inflater).also { binding = it }
-        viewModel.fetchPopularMovies()
-        viewModel.fetchTopRatedMovies()
-        return binding!!.root
+        return MoviesFragmentBinding.inflate(inflater).also { binding = it }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,15 +41,7 @@ class MoviesFragment : Fragment() {
             if (moviesState != null) {
                 binding?.progressBar?.isVisible = moviesState.isLoading
                 popularMovieAdapter.submitList(moviesState.movies)
-                if (moviesState.showError) {
-                    Snackbar.make(
-                        binding!!.root,
-                        "Popular movies fetch failed. ",
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .show()
-                    viewModel.hideError()
-                }
+                if (moviesState.showError) showFailSnackbar()
             }
         }
 
@@ -60,17 +49,19 @@ class MoviesFragment : Fragment() {
             if (moviesState != null) {
                 binding?.progressBar?.isVisible = moviesState.isLoading
                 topRatedMovieAdapter.submitList(moviesState.movies)
-                if (moviesState.showError) {
-                    Snackbar.make(
-                        binding!!.root,
-                        "Top rated movies fetch failed. ",
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .show()
-                    viewModel.hideError()
-                }
+                if (moviesState.showError) showFailSnackbar()
             }
         }
+    }
+
+    private fun showFailSnackbar() {
+        Snackbar.make(
+            binding!!.root,
+            "Failed to load movies. ",
+            Snackbar.LENGTH_SHORT
+        )
+            .show()
+        viewModel.hideError()
     }
 
     private fun navigateToDetail(movie: Movie) {

@@ -6,7 +6,6 @@
     android:layout_marginTop="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@null"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:background="@color/white">
 

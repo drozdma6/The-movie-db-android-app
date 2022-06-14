@@ -12,12 +12,14 @@ import kotlinx.coroutines.launch
 class MoviesViewModel(
     val movieRepository: MovieRepository
 ) : ViewModel() {
-    private val _popularMoviesStateStream: MutableLiveData<MoviesState> = MutableLiveData(MoviesState())
+    private val _popularMoviesStateStream: MutableLiveData<MoviesState> =
+        MutableLiveData(MoviesState())
     val popularMoviesStream: LiveData<MoviesState> = _popularMoviesStateStream
-    private val _topRatedMoviesStateStream: MutableLiveData<MoviesState> = MutableLiveData(MoviesState())
+    private val _topRatedMoviesStateStream: MutableLiveData<MoviesState> =
+        MutableLiveData(MoviesState())
     val topRatedMoviesStateStream: LiveData<MoviesState> = _topRatedMoviesStateStream
 
-    fun fetchPopularMovies() {
+    init {
         viewModelScope.launch {
             movieRepository.getPopularMoviesStream().collect {
                 _popularMoviesStateStream.value = _popularMoviesStateStream.value?.copy(movies = it)
@@ -25,32 +27,37 @@ class MoviesViewModel(
         }
         viewModelScope.launch {
             try {
-                _popularMoviesStateStream.value = _popularMoviesStateStream.value?.copy(isLoading = true)
+                _popularMoviesStateStream.value =
+                    _popularMoviesStateStream.value?.copy(isLoading = true)
                 delay(1000)
                 movieRepository.synchronizePopularMovies()
             } catch (t: Throwable) {
-                _popularMoviesStateStream.value = _popularMoviesStateStream.value?.copy(showError = true)
+                _popularMoviesStateStream.value =
+                    _popularMoviesStateStream.value?.copy(showError = true)
             } finally {
-                _popularMoviesStateStream.value = _popularMoviesStateStream.value?.copy(isLoading = false)
+                _popularMoviesStateStream.value =
+                    _popularMoviesStateStream.value?.copy(isLoading = false)
             }
         }
-    }
 
-    fun fetchTopRatedMovies() {
         viewModelScope.launch {
             movieRepository.getTopRatedMoviesStream().collect {
-                _topRatedMoviesStateStream.value = _topRatedMoviesStateStream.value?.copy(movies = it)
+                _topRatedMoviesStateStream.value =
+                    _topRatedMoviesStateStream.value?.copy(movies = it)
             }
         }
         viewModelScope.launch {
             try {
-                _topRatedMoviesStateStream.value = _topRatedMoviesStateStream.value?.copy(isLoading = true)
+                _topRatedMoviesStateStream.value =
+                    _topRatedMoviesStateStream.value?.copy(isLoading = true)
                 delay(1000)
                 movieRepository.synchronizeTopRatedMovies()
             } catch (t: Throwable) {
-                _topRatedMoviesStateStream.value = _topRatedMoviesStateStream.value?.copy(showError = true)
+                _topRatedMoviesStateStream.value =
+                    _topRatedMoviesStateStream.value?.copy(showError = true)
             } finally {
-                _topRatedMoviesStateStream.value = _topRatedMoviesStateStream.value?.copy(isLoading = false)
+                _topRatedMoviesStateStream.value =
+                    _topRatedMoviesStateStream.value?.copy(isLoading = false)
             }
         }
     }
