@@ -5,65 +5,82 @@ import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.popular.DbPopula
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.popular.PopularMovieDao
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.topRated.DbTopRatedMovie
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.topRated.TopRatedMovieDao
+import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.watchlist.DbWatchlistMovie
+import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.watchlist.WatchlistMovieDao
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class MovieRoomDataSource(
     private val popularMovieDao: PopularMovieDao,
-    private val topRatedMovieDao: TopRatedMovieDao
+    private val topRatedMovieDao: TopRatedMovieDao,
+    private val watchlistMovieDao: WatchlistMovieDao
 ) : MovieDatabaseDataSource {
+    private fun DbPopularMovie.toMovie() =
+        Movie(id, poster_path, title, overview, original_language)
+
+    private fun Movie.toDbPopularMovie() =
+        DbPopularMovie(id, poster_path, title, overview, original_language)
+
+    private fun DbTopRatedMovie.toMovie() =
+        Movie(id, poster_path, title, overview, original_language)
+
+    private fun Movie.toTopRatedMovie() =
+        DbTopRatedMovie(id, poster_path, title, overview, original_language)
+
+    private fun DbWatchlistMovie.toMovie() =
+        Movie(id, poster_path, title, overview, original_language)
+
+    private fun Movie.toDbWatchListMovie() =
+        DbWatchlistMovie(id, poster_path, title, overview, original_language)
+
     override fun getPopularMoviesStream(): Flow<List<Movie>> {
         return popularMovieDao.getMoviesStream().map { dbMovies ->
             dbMovies.map { dbMovie ->
-                Movie(
-                    id = dbMovie.id,
-                    poster_path = dbMovie.poster_path,
-                    title = dbMovie.title,
-                    overview = dbMovie.overview,
-                    original_language = dbMovie.original_language
-                )
+                dbMovie.toMovie()
             }
         }
     }
 
     override suspend fun synchronizePopularMovies(movies: List<Movie>) {
-        val dbMovie = movies.map { movie ->
-            DbPopularMovie(
-                id = movie.id,
-                poster_path = movie.poster_path,
-                title = movie.title,
-                overview = movie.overview,
-                original_language = movie.original_language,
-            )
+        val dbMovies = movies.map { movie ->
+            movie.toDbPopularMovie()
         }
-        popularMovieDao.synchronizeMovies(dbMovie)
+        popularMovieDao.synchronizeMovies(dbMovies)
     }
 
     override fun getTopRatedMoviesStream(): Flow<List<Movie>> {
         return topRatedMovieDao.getMoviesStream().map { dbMovies ->
             dbMovies.map { dbMovie ->
-                Movie(
-                    id = dbMovie.id,
-                    poster_path = dbMovie.poster_path,
-                    title = dbMovie.title,
-                    overview = dbMovie.overview,
-                    original_language = dbMovie.original_language
-                )
+                dbMovie.toMovie()
             }
         }
     }
 
     override suspend fun synchronizeTopRatedMovies(movies: List<Movie>) {
         val dbMovie = movies.map { movie ->
-            DbTopRatedMovie(
-                id = movie.id,
-                poster_path = movie.poster_path,
-                title = movie.title,
-                overview = movie.overview,
-                original_language = movie.original_language,
-            )
+            movie.toTopRatedMovie()
         }
         topRatedMovieDao.synchronizeMovies(dbMovie)
+    }
+
+    override fun getWatchlistMoviesStream(): Flow<List<Movie>> {
+        return watchlistMovieDao.getWatchlistMoviesStream().map { movies ->
+            movies.map { watchlistMovie ->
+                watchlistMovie.toMovie()
+            }
+        }
+    }
+
+    override fun insert(movie: Movie) {
+        watchlistMovieDao.insert(
+            movie.toDbWatchListMovie()
+        )
+    }
+
+    override fun delete(movie: Movie) {
+        watchlistMovieDao.delete(
+            movie.toDbWatchListMovie()
+        )
     }
 }
