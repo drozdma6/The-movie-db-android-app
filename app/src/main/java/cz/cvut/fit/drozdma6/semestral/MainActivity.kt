@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import cz.cvut.fit.drozdma6.semestral.databinding.ActivityMainBinding
+import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

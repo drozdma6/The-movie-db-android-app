@@ -72,13 +72,13 @@ class MovieRoomDataSource(
         }
     }
 
-    override fun insert(movie: Movie) {
+    override suspend fun insert(movie: Movie) {
         watchlistMovieDao.insert(
             movie.toDbWatchListMovie()
         )
     }
 
-    override fun delete(movie: Movie) {
+    override suspend fun delete(movie: Movie) {
         watchlistMovieDao.delete(
             movie.toDbWatchListMovie()
         )

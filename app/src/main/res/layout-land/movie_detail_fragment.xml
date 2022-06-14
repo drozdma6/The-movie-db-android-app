@@ -105,7 +105,7 @@
         app:layout_constraintStart_toStartOf="@id/scrollView">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_to_watchlist"
+            android:id="@+id/btn_add_to_watchlist"
             style="@style/ButtonStyle"
             android:layout_width="250dp"
             android:layout_height="wrap_content"

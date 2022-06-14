@@ -24,4 +24,13 @@ class MovieRepository(
         val movies = movieRemoteDataSource.fetchTopRatedMovies()
         movieDatabase.synchronizeTopRatedMovies(movies)
     }
+
+    suspend fun insertWatchlistMovie(movie: Movie){
+        movieDatabase.insert(movie)
+    }
+
+    suspend fun deleteWatchlistMovie(movie: Movie){
+        movieDatabase.delete(movie)
+    }
+
 }

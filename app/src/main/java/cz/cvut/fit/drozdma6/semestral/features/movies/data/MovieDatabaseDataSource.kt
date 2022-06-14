@@ -11,4 +11,10 @@ interface MovieDatabaseDataSource {
     fun getTopRatedMoviesStream(): Flow<List<Movie>>
 
     suspend fun synchronizeTopRatedMovies(movies: List<Movie>)
+
+    fun getWatchlistMoviesStream(): Flow<List<Movie>>
+
+    suspend fun insert(movie: Movie)
+
+    suspend fun delete(movie: Movie)
 }
