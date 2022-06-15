@@ -25,12 +25,15 @@ class MovieRepository(
         movieDatabase.synchronizeTopRatedMovies(movies)
     }
 
-    suspend fun insertWatchlistMovie(movie: Movie){
+    suspend fun insertWatchlistMovie(movie: Movie) {
         movieDatabase.insert(movie)
     }
 
-    suspend fun deleteWatchlistMovie(movie: Movie){
+    suspend fun deleteWatchlistMovie(movie: Movie) {
         movieDatabase.delete(movie)
     }
 
+    fun getWatchlistMoviesStream(): Flow<List<Movie>> {
+        return movieDatabase.getWatchlistMoviesStream()
+    }
 }

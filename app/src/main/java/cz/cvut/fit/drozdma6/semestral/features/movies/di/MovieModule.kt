@@ -10,6 +10,7 @@ import cz.cvut.fit.drozdma6.semestral.features.movies.data.retrofit.MovieRetrofi
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.MovieRoomDataSource
 import cz.cvut.fit.drozdma6.semestral.features.movies.presentation.MovieDetailFragment
 import cz.cvut.fit.drozdma6.semestral.features.movies.presentation.MoviesViewModel
+import cz.cvut.fit.drozdma6.semestral.features.movies.presentation.WatchListFragment
 import cz.cvut.fit.drozdma6.semestral.shared.data.room.MovieDatabase
 import org.koin.androidx.fragment.dsl.fragment
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -49,6 +50,10 @@ val movieModule = module {
 
     fragment{
         MovieDetailFragment(movieRepository = get())
+    }
+
+    fragment{
+        WatchListFragment(movieRepository = get())
     }
 }
 

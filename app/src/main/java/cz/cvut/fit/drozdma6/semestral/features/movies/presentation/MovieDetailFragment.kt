@@ -22,7 +22,7 @@ import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRepository
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
 
 class MovieDetailFragment(
-    val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository
 ) : Fragment() {
     private var _binding: MovieDetailFragmentBinding? = null
     private val binding get() = _binding!!
@@ -47,7 +47,6 @@ class MovieDetailFragment(
             activity?.onBackPressed()
         }
         txtTitle.text = movie.title
-
         txtDetail.text = movie.overview
         txtOriginalLanguage.text = movie.original_language
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
