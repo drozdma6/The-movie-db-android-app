@@ -1,9 +1,11 @@
 package cz.cvut.fit.drozdma6.semestral.features.movies.presentation
 
+import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +68,12 @@ class MovieDetailFragment(
             }
         }
         likeBtn.addToWatchlistListener(movie)
+        btnAddToWatchlist.setOnClickListener {
+            val uri =  "https://www.themoviedb.org/movie/" + movie.id
+            val browserIntent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            startActivity(browserIntent)
+        }
     }
 
     private fun ImageButton.addToWatchlistListener(movie: Movie) {
