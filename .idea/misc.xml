@@ -8,6 +8,8 @@
         <entry key="app/src/main/res/drawable/bottom_navigation_background.xml" value="0.12777862548828123" />
         <entry key="app/src/main/res/drawable/bottom_navigation_shape.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.109" />
+        <entry key="app/src/main/res/drawable/ic_bottom_nav_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_netflix_2015_logo.xml" value="0.1" />
@@ -17,6 +19,7 @@
         <entry key="app/src/main/res/drawable/movie_detail_text_background.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/movie_detail_text_background_land.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/normal_button.xml" value="0.109" />
+        <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout-land/movie_detail_fragment.xml" value="0.24214417744916822" />
         <entry key="app/src/main/res/layout-land/movie_item.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout-land/movies_fragment.xml" value="0.19114583333333332" />
