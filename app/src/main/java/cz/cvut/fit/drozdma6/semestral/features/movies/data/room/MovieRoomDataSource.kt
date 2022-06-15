@@ -83,4 +83,8 @@ class MovieRoomDataSource(
             movie.toDbWatchListMovie()
         )
     }
+
+    override suspend fun isInWatchlist(id: String): Boolean {
+        return watchlistMovieDao.isInWatchlist(id)
+    }
 }

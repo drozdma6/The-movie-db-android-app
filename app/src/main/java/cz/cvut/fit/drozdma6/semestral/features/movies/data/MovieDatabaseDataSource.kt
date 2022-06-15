@@ -17,4 +17,6 @@ interface MovieDatabaseDataSource {
     suspend fun insert(movie: Movie)
 
     suspend fun delete(movie: Movie)
+
+    suspend fun isInWatchlist(id: String): Boolean
 }

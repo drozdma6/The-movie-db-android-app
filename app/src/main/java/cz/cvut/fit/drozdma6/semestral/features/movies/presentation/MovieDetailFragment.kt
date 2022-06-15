@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatButton
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -17,6 +17,7 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.google.android.material.snackbar.Snackbar
+import cz.cvut.fit.drozdma6.semestral.R
 import cz.cvut.fit.drozdma6.semestral.databinding.MovieDetailFragmentBinding
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRepository
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
@@ -26,6 +27,7 @@ class MovieDetailFragment(
 ) : Fragment() {
     private var _binding: MovieDetailFragmentBinding? = null
     private val binding get() = _binding!!
+    private var movieIsInWatchlist = false
     private val args: MovieDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -54,14 +56,31 @@ class MovieDetailFragment(
             val url = imageBaseUrl + movie.poster_path
             setDynamicBackgrounds(url)
         }
-        btnAddToWatchlist.addToWatchlistListener(movie)
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            movieIsInWatchlist = if (movieRepository.isInWatchlist(movie.id)) {
+                likeBtn.setImageResource(R.drawable.ic_like_selected)
+                true
+            } else {
+                likeBtn.setImageResource(R.drawable.ic_like_unselected)
+                false
+            }
+        }
+        likeBtn.addToWatchlistListener(movie)
     }
 
-    private fun AppCompatButton.addToWatchlistListener(movie: Movie) {
+    private fun ImageButton.addToWatchlistListener(movie: Movie) {
         setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launchWhenCreated {
                 try {
-                    movieRepository.insertWatchlistMovie(movie)
+                    if (movieIsInWatchlist) {
+                        movieRepository.deleteWatchlistMovie(movie)
+                        setImageResource(R.drawable.ic_like_unselected)
+                        movieIsInWatchlist = false
+                    } else {
+                        movieRepository.insertWatchlistMovie(movie)
+                        setImageResource(R.drawable.ic_like_selected)
+                        movieIsInWatchlist = true
+                    }
                 } catch (e: SQLiteConstraintException) {
                     Snackbar.make(
                         binding.root,

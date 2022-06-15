@@ -36,4 +36,8 @@ class MovieRepository(
     fun getWatchlistMoviesStream(): Flow<List<Movie>> {
         return movieDatabase.getWatchlistMoviesStream()
     }
+
+    suspend fun isInWatchlist(id: String): Boolean {
+        return movieDatabase.isInWatchlist(id)
+    }
 }

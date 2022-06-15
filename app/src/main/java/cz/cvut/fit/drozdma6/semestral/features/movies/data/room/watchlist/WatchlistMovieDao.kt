@@ -13,4 +13,7 @@ abstract class WatchlistMovieDao {
 
     @Delete
     abstract suspend fun delete(watchlistMovie: DbWatchlistMovie)
+
+    @Query("SELECT EXISTS(SELECT * FROM watchlist WHERE id = :id)")
+    abstract suspend fun isInWatchlist(id : String) : Boolean
 }
