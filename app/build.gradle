@@ -4,15 +4,15 @@ plugins {
     id 'androidx.navigation.safeargs'
     id 'com.google.devtools.ksp'
     id 'kotlin-parcelize'
-
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.appdistribution'
 }
 
 android {
     compileSdk 31
 
-
     defaultConfig {
-        applicationId "com.example.biand8"
+        applicationId "com.biand.drozdma6.semestral"
         minSdk 23
         targetSdk 31
         versionCode 1
@@ -22,7 +22,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+
+        }
         release {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -92,4 +97,7 @@ dependencies {
 
     //Palette
     implementation 'androidx.palette:palette:1.0.0'
+
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

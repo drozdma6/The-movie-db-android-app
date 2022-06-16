@@ -12,28 +12,43 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.firebase.analytics.FirebaseAnalytics
 import cz.cvut.fit.drozdma6.semestral.databinding.SearchFragmentBinding
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRepository
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
 import java.util.*
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 class SearchFragment(
     private val movieRepository: MovieRepository
 ) : Fragment(), SearchView.OnQueryTextListener {
     private var binding: SearchFragmentBinding? = null
     private val adapter = MoviesAdapter(::navigateToDetail)
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
                 val text = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                firebaseAnalytics.logEvent(
+                    "speech_recognition_words",
+                    bundleOf(Pair("word", text?.get(0).toString()))
+                )
+
                 binding?.searchBar?.setQuery(text?.get(0).toString(), false)
             }
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        firebaseAnalytics = Firebase.analytics
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +80,7 @@ class SearchFragment(
 
     private fun SearchFragmentBinding.bind() {
         btn.setOnClickListener {
+            firebaseAnalytics.logEvent("speech_recognizer_used", bundleOf())
             searchBar.setQuery("", false)
             askSpeechInput()
         }
@@ -117,3 +133,4 @@ class SearchFragment(
         }
     }
 }
+
