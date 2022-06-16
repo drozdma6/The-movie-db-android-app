@@ -19,4 +19,6 @@ interface MovieDatabaseDataSource {
     suspend fun delete(movie: Movie)
 
     suspend fun isInWatchlist(id: String): Boolean
+
+    fun getMoviesWithTitle(title: String): Flow<List<Movie>>
 }

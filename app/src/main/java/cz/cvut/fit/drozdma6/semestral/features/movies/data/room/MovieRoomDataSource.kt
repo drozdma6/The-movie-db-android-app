@@ -10,36 +10,15 @@ import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.watchlist.Watchl
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 
 class MovieRoomDataSource(
     private val popularMovieDao: PopularMovieDao,
     private val topRatedMovieDao: TopRatedMovieDao,
     private val watchlistMovieDao: WatchlistMovieDao
 ) : MovieDatabaseDataSource {
-    private fun DbPopularMovie.toMovie() =
-        Movie(id, poster_path, title, overview, original_language)
-
-    private fun Movie.toDbPopularMovie() =
-        DbPopularMovie(id, poster_path, title, overview, original_language)
-
-    private fun DbTopRatedMovie.toMovie() =
-        Movie(id, poster_path, title, overview, original_language)
-
-    private fun Movie.toTopRatedMovie() =
-        DbTopRatedMovie(id, poster_path, title, overview, original_language)
-
-    private fun DbWatchlistMovie.toMovie() =
-        Movie(id, poster_path, title, overview, original_language)
-
-    private fun Movie.toDbWatchListMovie() =
-        DbWatchlistMovie(id, poster_path, title, overview, original_language)
-
     override fun getPopularMoviesStream(): Flow<List<Movie>> {
-        return popularMovieDao.getMoviesStream().map { dbMovies ->
-            dbMovies.map { dbMovie ->
-                dbMovie.toMovie()
-            }
-        }
+        return mapToMovies(popularMovieDao.getMoviesStream())
     }
 
     override suspend fun synchronizePopularMovies(movies: List<Movie>) {
@@ -50,11 +29,7 @@ class MovieRoomDataSource(
     }
 
     override fun getTopRatedMoviesStream(): Flow<List<Movie>> {
-        return topRatedMovieDao.getMoviesStream().map { dbMovies ->
-            dbMovies.map { dbMovie ->
-                dbMovie.toMovie()
-            }
-        }
+        return mapToMovies(topRatedMovieDao.getMoviesStream())
     }
 
     override suspend fun synchronizeTopRatedMovies(movies: List<Movie>) {
@@ -65,11 +40,7 @@ class MovieRoomDataSource(
     }
 
     override fun getWatchlistMoviesStream(): Flow<List<Movie>> {
-        return watchlistMovieDao.getWatchlistMoviesStream().map { movies ->
-            movies.map { watchlistMovie ->
-                watchlistMovie.toMovie()
-            }
-        }
+        return mapToMovies(watchlistMovieDao.getWatchlistMoviesStream())
     }
 
     override suspend fun insert(movie: Movie) {
@@ -87,4 +58,44 @@ class MovieRoomDataSource(
     override suspend fun isInWatchlist(id: String): Boolean {
         return watchlistMovieDao.isInWatchlist(id)
     }
+
+    override fun getMoviesWithTitle(title: String): Flow<List<Movie>> {
+        val popularMovies = mapToMovies(popularMovieDao.getMoviesWithTitle(title))
+        val topRatedMovies = mapToMovies(topRatedMovieDao.getMoviesWithTitle(title))
+        val watchlistMovies = mapToMovies(watchlistMovieDao.getMoviesWithTitle(title))
+        return merge(watchlistMovies, topRatedMovies, popularMovies)
+    }
+
+    private fun <T> mapToMovies(flowDbMovies: Flow<List<T>>): Flow<List<Movie>> {
+        return flowDbMovies.map { dbMovies ->
+            dbMovies.map { dbMovie ->
+                when (dbMovie) {
+                    is DbPopularMovie -> dbMovie.toMovie()
+                    is DbTopRatedMovie -> dbMovie.toMovie()
+                    is DbWatchlistMovie -> dbMovie.toMovie()
+                    else -> {
+                        throw IllegalArgumentException()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun DbPopularMovie.toMovie() =
+        Movie(id, poster_path, title, overview, original_language)
+
+    private fun Movie.toDbPopularMovie() =
+        DbPopularMovie(id, poster_path, title, overview, original_language)
+
+    private fun DbTopRatedMovie.toMovie() =
+        Movie(id, poster_path, title, overview, original_language)
+
+    private fun Movie.toTopRatedMovie() =
+        DbTopRatedMovie(id, poster_path, title, overview, original_language)
+
+    private fun DbWatchlistMovie.toMovie() =
+        Movie(id, poster_path, title, overview, original_language)
+
+    private fun Movie.toDbWatchListMovie() =
+        DbWatchlistMovie(id, poster_path, title, overview, original_language)
 }

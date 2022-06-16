@@ -18,10 +18,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_watch_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:clipToPadding="false"
         android:padding="4dp"
         android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/watchlist_txt" />
 

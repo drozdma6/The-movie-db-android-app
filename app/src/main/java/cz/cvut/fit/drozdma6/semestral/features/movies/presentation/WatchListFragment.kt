@@ -48,4 +48,9 @@ class WatchListFragment(
         val directions = WatchListFragmentDirections.toMovieDetailFragment(movie)
         findNavController().navigate(directions)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

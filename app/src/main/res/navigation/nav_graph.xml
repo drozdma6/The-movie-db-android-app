@@ -24,7 +24,15 @@
     <fragment
         android:id="@+id/watchlist"
         android:name="cz.cvut.fit.drozdma6.semestral.features.movies.presentation.WatchListFragment"
-        android:label="WatchListFragment" >
+        android:label="WatchListFragment">
+        <action
+            android:id="@+id/toMovieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/search"
+        android:name="cz.cvut.fit.drozdma6.semestral.features.movies.presentation.SearchFragment"
+        android:label="SearchFragment">
         <action
             android:id="@+id/toMovieDetailFragment"
             app:destination="@id/movieDetailFragment" />

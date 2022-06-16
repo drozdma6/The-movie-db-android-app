@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.popular.DbPopularMovie
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -24,4 +23,7 @@ abstract class PopularMovieDao {
 
     @Query("DELETE FROM popularMovies")
     protected abstract suspend fun delete()
+
+    @Query("SELECT * FROM popularMovies where title LIKE :title")
+    abstract fun getMoviesWithTitle(title: String): Flow<List<DbPopularMovie>>
 }

@@ -9,4 +9,9 @@
         android:id="@+id/watchlist"
         android:icon="@drawable/ic_hearth_selector"
         android:title="@string/watchlist" />
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_selector"
+        android:title="@string/search" />
 </menu>

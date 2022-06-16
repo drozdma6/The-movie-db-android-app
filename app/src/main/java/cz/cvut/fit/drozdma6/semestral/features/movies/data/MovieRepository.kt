@@ -40,4 +40,8 @@ class MovieRepository(
     suspend fun isInWatchlist(id: String): Boolean {
         return movieDatabase.isInWatchlist(id)
     }
+
+    fun getMovieWithTitle(title: String): Flow<List<Movie>>{
+        return movieDatabase.getMoviesWithTitle(title)
+    }
 }

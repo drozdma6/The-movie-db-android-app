@@ -22,4 +22,7 @@ abstract class TopRatedMovieDao {
 
     @Query("DELETE FROM topRatedMovies")
     protected abstract suspend fun delete()
+
+    @Query("SELECT * FROM topRatedMovies where title LIKE :title")
+    abstract fun getMoviesWithTitle(title: String): Flow<List<DbTopRatedMovie>>
 }

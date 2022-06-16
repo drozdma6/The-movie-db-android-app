@@ -16,4 +16,7 @@ abstract class WatchlistMovieDao {
 
     @Query("SELECT EXISTS(SELECT * FROM watchlist WHERE id = :id)")
     abstract suspend fun isInWatchlist(id : String) : Boolean
+
+    @Query("SELECT * FROM watchlist where title LIKE :title")
+    abstract fun getMoviesWithTitle(title: String): Flow<List<DbWatchlistMovie>>
 }

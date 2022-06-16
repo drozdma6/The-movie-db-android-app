@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/ic_bottom_nav_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_heart_filled.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_hearth_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_filled.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_selector.xml" value="0.1" />
@@ -18,13 +19,18 @@
         <entry key="app/src/main/res/drawable/ic_like_selected.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_like_selector.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_like_unselected.xml" value="0.1175" />
+        <entry key="app/src/main/res/drawable/ic_microphone.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_netflix_2015_logo.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1175" />
+        <entry key="app/src/main/res/drawable/ic_search_filled.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_search_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_watchlist.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_watchlist_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/movie_detail_button_background_land.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/movie_detail_text_background.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/movie_detail_text_background_land.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/normal_button.xml" value="0.109" />
+        <entry key="app/src/main/res/drawable/search_view.xml" value="0.1175" />
         <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout-land/movie_detail_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout-land/movie_item.xml" value="0.19114583333333332" />
@@ -36,6 +42,7 @@
         <entry key="app/src/main/res/layout/movie_detail_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/movie_item.xml" value="0.32967032967032966" />
         <entry key="app/src/main/res/layout/movies_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/search_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/watchlist_fragment.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.1" />
       </map>

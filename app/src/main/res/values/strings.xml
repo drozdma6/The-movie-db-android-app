@@ -12,4 +12,5 @@
     <string name="watchlist">Watchlist</string>
     <string name="home">Home</string>
     <string name="search_on_tmdb">Search on tmbd</string>
+    <string name="search">Search</string>
 </resources>

@@ -1,15 +1,14 @@
 package cz.cvut.fit.drozdma6.semestral.features.movies.di
 
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieDatabaseDataSource
-import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRepository
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRemoteDataSource
+import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRepository
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.retrofit.MovieApiDescription
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.retrofit.MovieRetrofitDataSource
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.room.MovieRoomDataSource
 import cz.cvut.fit.drozdma6.semestral.features.movies.presentation.MovieDetailFragment
 import cz.cvut.fit.drozdma6.semestral.features.movies.presentation.MoviesViewModel
+import cz.cvut.fit.drozdma6.semestral.features.movies.presentation.SearchFragment
 import cz.cvut.fit.drozdma6.semestral.features.movies.presentation.WatchListFragment
 import cz.cvut.fit.drozdma6.semestral.shared.data.room.MovieDatabase
 import org.koin.androidx.fragment.dsl.fragment
@@ -54,6 +53,10 @@ val movieModule = module {
 
     fragment{
         WatchListFragment(movieRepository = get())
+    }
+
+    fragment{
+        SearchFragment(movieRepository = get())
     }
 }
 
