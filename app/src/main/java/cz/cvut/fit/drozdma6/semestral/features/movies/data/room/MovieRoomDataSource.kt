@@ -17,9 +17,9 @@ class MovieRoomDataSource(
     private val topRatedMovieDao: TopRatedMovieDao,
     private val watchlistMovieDao: WatchlistMovieDao
 ) : MovieDatabaseDataSource {
-    override fun getPopularMoviesStream(): Flow<List<Movie>> {
-        return mapToMovies(popularMovieDao.getMoviesStream())
-    }
+    override fun getPopularMoviesStream(): Flow<List<Movie>> =
+        mapToMovies(popularMovieDao.getMoviesStream())
+
 
     override suspend fun synchronizePopularMovies(movies: List<Movie>) {
         val dbMovies = movies.map { movie ->
@@ -28,9 +28,9 @@ class MovieRoomDataSource(
         popularMovieDao.synchronizeMovies(dbMovies)
     }
 
-    override fun getTopRatedMoviesStream(): Flow<List<Movie>> {
-        return mapToMovies(topRatedMovieDao.getMoviesStream())
-    }
+    override fun getTopRatedMoviesStream(): Flow<List<Movie>> =
+        mapToMovies(topRatedMovieDao.getMoviesStream())
+
 
     override suspend fun synchronizeTopRatedMovies(movies: List<Movie>) {
         val dbMovie = movies.map { movie ->
@@ -39,9 +39,9 @@ class MovieRoomDataSource(
         topRatedMovieDao.synchronizeMovies(dbMovie)
     }
 
-    override fun getWatchlistMoviesStream(): Flow<List<Movie>> {
-        return mapToMovies(watchlistMovieDao.getWatchlistMoviesStream())
-    }
+    override fun getWatchlistMoviesStream(): Flow<List<Movie>> =
+        mapToMovies(watchlistMovieDao.getWatchlistMoviesStream())
+
 
     override suspend fun insert(movie: Movie) {
         watchlistMovieDao.insert(
@@ -55,16 +55,16 @@ class MovieRoomDataSource(
         )
     }
 
-    override suspend fun isInWatchlist(id: String): Boolean {
-        return watchlistMovieDao.isInWatchlist(id)
-    }
+    override suspend fun isInWatchlist(id: String): Boolean =
+        watchlistMovieDao.isInWatchlist(id)
 
-    override fun getMoviesWithTitle(title: String): Flow<List<Movie>> {
-        val popularMovies = mapToMovies(popularMovieDao.getMoviesWithTitle(title))
-        val topRatedMovies = mapToMovies(topRatedMovieDao.getMoviesWithTitle(title))
-        val watchlistMovies = mapToMovies(watchlistMovieDao.getMoviesWithTitle(title))
-        return merge(watchlistMovies, topRatedMovies, popularMovies)
-    }
+
+    override fun getMoviesWithTitle(title: String): Flow<List<Movie>> =
+        merge(
+            mapToMovies(popularMovieDao.getMoviesWithTitle(title)),
+            mapToMovies(topRatedMovieDao.getMoviesWithTitle(title)),
+            mapToMovies(watchlistMovieDao.getMoviesWithTitle(title)))
+
 
     private fun <T> mapToMovies(flowDbMovies: Flow<List<T>>): Flow<List<Movie>> {
         return flowDbMovies.map { dbMovies ->
