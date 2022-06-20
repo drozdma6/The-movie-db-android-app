@@ -9,10 +9,10 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_view"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="50dp"
+        android:layout_width="@dimen/detail_img_width"
+        android:layout_height="@dimen/detail_img_height"
+        android:layout_marginTop="@dimen/detail_img_margin_top"
+        android:layout_marginBottom="@dimen/detail_img_margin_bot"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,8 +24,8 @@
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="@dimen/detail_img_button_margin_start"
+        android:layout_marginTop="@dimen/detail_img_button_margin_top"
         android:background="@null"
         android:src="@drawable/ic_back"
         app:layout_constraintEnd_toStartOf="@id/image_view"
@@ -36,8 +36,8 @@
         android:id="@+id/like_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="@dimen/detail_img_button_margin_top"
+        android:layout_marginEnd="@dimen/detail_img_button_margin_end"
         android:background="@null"
         android:src="@drawable/ic_like_unselected"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp">
+            android:padding="@dimen/detail_scroll_padding">
 
             <TextView
                 android:id="@+id/txt_title"
@@ -75,7 +75,7 @@
                 style="@style/TextAppearance.semestral.BookDetailText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/detail_text_margin"
                 android:text="@string/original_language"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,8 +86,8 @@
                 style="@style/TextAppearance.semestral.BookDetailText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="@dimen/detail_text_margin"
+                android:layout_marginTop="@dimen/detail_text_margin"
                 app:layout_constraintStart_toEndOf="@id/original_language"
                 app:layout_constraintTop_toBottomOf="@id/txt_title" />
 
@@ -96,7 +96,7 @@
                 style="@style/TextAppearance.semestral.BookDetailText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/detail_text_margin"
                 android:lineSpacingMultiplier="1.5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -119,13 +119,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_to_watchlist"
             style="@style/ButtonStyle"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/detail_addWatchlist_button_width"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_margin="@dimen/detail_addWatchlist_btn_margin"
             android:background="@drawable/normal_button"
             android:text="@string/search_on_tmdb" />
     </RelativeLayout>

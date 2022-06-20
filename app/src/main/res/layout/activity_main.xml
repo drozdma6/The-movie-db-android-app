@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        android:padding="20dp"
+        android:padding="@dimen/netflix_img_padding"
         android:src="@drawable/ic_netflix_2015_logo" />
 
 
@@ -28,7 +28,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/bottom_nav_margin"
         android:background="@drawable/bottom_navigation_background"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"

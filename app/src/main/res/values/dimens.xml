@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_nav_margin">15dp</dimen>
+    <dimen name="detail_img_width">250dp</dimen>
+    <dimen name="detail_img_height">250dp</dimen>
+    <dimen name="detail_img_margin_top">70dp</dimen>
+    <dimen name="detail_img_margin_bot">50dp</dimen>
+    <dimen name="detail_img_button_margin_start">20dp</dimen>
+    <dimen name="detail_img_button_margin_top">30dp</dimen>
+    <dimen name="detail_img_button_margin_end">20dp</dimen>
+    <dimen name="detail_scroll_padding">30dp</dimen>
+    <dimen name="detail_text_margin">15dp</dimen>
+    <dimen name="detail_addWatchlist_button_width">250dp</dimen>
+    <dimen name="detail_addWatchlist_btn_margin">15dp</dimen>
+    <dimen name="item_margin_start">5dp</dimen>
+    <dimen name="item_margin_top">10dp</dimen>
+    <dimen name="item_img_width">122dp</dimen>
+    <dimen name="item_img_heigth">185dp</dimen>
+    <dimen name="movie_fragment_text_margin">14dp</dimen>
+    <dimen name="recycler_padding">4dp</dimen>
+    <dimen name="search_view_height">48dp</dimen>
+    <dimen name="search_view_margin">30dp</dimen>
+    <dimen name="search_view_img_button_margin_end">15dp</dimen>
+    <dimen name="search_fragment_margin_top">20dp</dimen>
+    <dimen name="watchlist_txt_margin">14dp</dimen>
+    <dimen name="netflix_img_padding">20dp</dimen>
+</resources>

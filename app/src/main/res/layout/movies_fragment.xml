@@ -33,7 +33,7 @@
                 style="@style/TextAppearance.movieItem.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="@dimen/movie_fragment_text_margin"
                 android:text="@string/most_poular"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:padding="4dp"
+                android:padding="@dimen/recycler_padding"
                 android:scrollbars="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mostPopular" />
@@ -53,7 +53,7 @@
                 style="@style/TextAppearance.movieItem.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="@dimen/movie_fragment_text_margin"
                 android:text="@string/top_rated"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_most_popular" />
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:clipToPadding="false"
-                android:padding="4dp"
+                android:padding="@dimen/recycler_padding"
                 android:scrollbars="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/top_rated" />
