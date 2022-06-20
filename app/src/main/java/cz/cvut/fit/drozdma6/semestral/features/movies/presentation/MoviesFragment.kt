@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import cz.cvut.fit.drozdma6.semestral.databinding.MoviesFragmentBinding
 import cz.cvut.fit.drozdma6.semestral.features.movies.domain.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,6 +22,12 @@ class MoviesFragment : Fragment() {
     private val popularMovieAdapter = MoviesAdapter(::navigateToDetail)
     private val topRatedMovieAdapter = MoviesAdapter(::navigateToDetail)
     private val viewModel by viewModel<MoviesViewModel>()
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        firebaseAnalytics = Firebase.analytics
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +59,10 @@ class MoviesFragment : Fragment() {
             if (moviesState != null) {
                 binding?.progressBar?.isVisible = moviesState.isLoading
                 topRatedMovieAdapter.submitList(moviesState.movies)
-                if (moviesState.showError) showFailSnackbar()
+                if (moviesState.showError){
+                    firebaseAnalytics.logEvent("failed_to_fetch_movies", bundleOf())
+                    showFailSnackbar()
+                }
             }
         }
     }

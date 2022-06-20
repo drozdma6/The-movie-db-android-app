@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -19,6 +20,9 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import cz.cvut.fit.drozdma6.semestral.R
 import cz.cvut.fit.drozdma6.semestral.databinding.MovieDetailFragmentBinding
 import cz.cvut.fit.drozdma6.semestral.features.movies.data.MovieRepository
@@ -31,6 +35,12 @@ class MovieDetailFragment(
     private val binding get() = _binding!!
     private var movieIsInWatchlist = false
     private val args: MovieDetailFragmentArgs by navArgs()
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        firebaseAnalytics = Firebase.analytics
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,6 +79,7 @@ class MovieDetailFragment(
         }
         likeBtn.addToWatchlistListener(movie)
         btnAddToWatchlist.setOnClickListener {
+            firebaseAnalytics.logEvent("browser_movie_detail_used", bundleOf())
             val uri =  "https://www.themoviedb.org/movie/" + movie.id
             val browserIntent =
                 Intent(Intent.ACTION_VIEW, Uri.parse(uri))
