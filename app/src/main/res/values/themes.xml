@@ -46,4 +46,9 @@
     <style name="AppTheme.SearchView" parent="Widget.AppCompat.SearchView">
         <item name="closeIcon">@android:color/transparent</item>
     </style>
+
+    <style name="Theme.biand.semestetral.splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/netflix_splash_screen</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
 </resources>
